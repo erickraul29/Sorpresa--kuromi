@@ -1,0 +1,85 @@
+doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sorpresa 💖</title>
+  <style>
+    :root{--bg:#fff4fb;--card:#fff;--accent:#ff7ab6;--text:#2b2b2b}
+    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
+    body{display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#fff 0%,#ffeef9 100%);padding:20px;color:var(--text)}
+    .card{background:var(--card);border-radius:20px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,.08);max-width:420px;width:100%;text-align:center}
+    .kuromi{
+      width:240px;height:240px;object-fit:contain;margin:0 auto 8px;
+      filter:drop-shadow(0 8px 18px rgba(0,0,0,.12));
+    }
+    .bubble{
+      display:inline-block;margin-bottom:12px;
+      background:linear-gradient(90deg,#fff 0%,#fff2f8 100%);
+      padding:10px 14px;border-radius:999px;font-weight:600;
+      animation: popIn 0.8s ease-out forwards;opacity:0;
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.5); opacity:0; }
+      60% { transform: scale(1.1); opacity:1; }
+      100% { transform: scale(1); }
+    }
+    h1{font-size:20px;margin:6px 0 12px}
+    p.message{font-size:18px;margin:12px 0 10px}
+    .controls{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+    button{background:var(--accent);border:none;color:white;padding:10px 14px;border-radius:12px;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(255,122,182,.18)}
+    button.secondary{background:transparent;color:var(--accent);border:2px solid rgba(255,122,182,.15)}
+    audio{display:block;margin:10px auto;outline:none}
+    small.note{display:block;margin-top:8px;color:#777;font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- GIF animado de Kuromi saludando -->
+    <img class="kuromi" src="https://media.tenor.com/Sw2-dLgqtZIAAAAi/kuromi.gif" alt="Kuromi saludando" />
+    <div class="bubble">Hola 👋</div>
+    <h1>Te amo mi cachorra 🥰</h1>
+    <p class="message">Atte. Erick Raul Corona Lima</p>
+
+    <!-- Canción Sweet Love (Pixabay) -->
+    <audio id="bgAudio" controls preload="auto">
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c86c6c6ef.mp3?filename=sweet-love-16595.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio.
+    </audio>
+
+    <div class="controls">
+      <button id="playBtn">▶️ Reproducir</button>
+      <button id="whatsappBtn" class="secondary">Enviar por WhatsApp</button>
+    </div>
+    <small class="note">Abre esta página en el celular para mejor experiencia.</small>
+  </div>
+
+  <script>
+    const PAGE_URL = "PAGE_URL"; // ← Pega aquí tu URL de GitHub Pages
+
+    const audio = document.getElementById('bgAudio');
+    const playBtn = document.getElementById('playBtn');
+    const whatsappBtn = document.getElementById('whatsappBtn');
+
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play().catch(() => {});
+        playBtn.textContent = '⏸ Pausar';
+      } else {
+        audio.pause();
+        playBtn.textContent = '▶️ Reproducir';
+      }
+    });
+
+    function makeWhatsAppLink() {
+      const texto = `¡Sorpresa! 🎁 Abre este link: ${PAGE_URL} \n\nTe amo mi cachorra 🥰\n— Erick`;
+      const encoded = encodeURIComponent(texto);
+      return `https://wa.me/?text=${encoded}`;
+    }
+
+    whatsappBtn.addEventListener('click', () => {
+      window.open(makeWhatsAppLink(), '_blank');
+    });
+  </script>
+</body>
+</html>
